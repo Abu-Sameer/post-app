@@ -4,7 +4,7 @@ import PostAdd from './feature/PostPro/PostAdd';
 import PostsPage from './feature/PostPro/PostsPage';
 function App() {
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 text-center">
       <Provider store={store}>
         <PostAdd />
         <PostsPage />

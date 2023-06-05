@@ -21,14 +21,8 @@ export default function PostAdd() {
 
   const cansave = Boolean(title) && Boolean(content) && Boolean(userId);
 
-  const userOptions = users.map((user) => (
-    <option key={user.id} value={user.id}>
-      {user.name}
-    </option>
-  ));
-
   return (
-    <div className="container">
+    <div className="container text-start w-50">
       <h2 className=" text-light">Add New Post</h2>
       <div className="">
         <div className="mb-3">
@@ -50,7 +44,11 @@ export default function PostAdd() {
             className="form-select text-center"
           >
             <option>...select...</option>
-            {userOptions}
+            {users.map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="mb-3">

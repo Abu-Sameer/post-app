@@ -7,11 +7,11 @@ export default function TimeAgo({ timestamp }) {
   if (timestamp) {
     const date = parseISO(timestamp);
     const timePeriod = formatDistanceToNow(date);
-    timeAgo = `${timePeriod} ago`;
+    timeAgo = timePeriod;
   }
   return (
-    <span title={timestamp}>
-      &nbsp; <i>{timeAgo}</i>
-    </span>
+    <div title={timestamp}>
+      &nbsp; <i>time: {timeAgo} ago</i>
+    </div>
   );
 }
