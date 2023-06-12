@@ -1,21 +1,29 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { addNewPost } from '../AllSlices/PostSlice';
-import { addPost } from '../AllSlices/PostSlice';
+import { useParams, useNavigate } from 'react-router-dom';
 import { sellectAllUsers } from '../AllSlices/UserSlice';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { removePost, selectPostById, updatePost } from '../AllSlices/PostSlice';
 
-export default function PostAdd() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [userId, setUserId] = useState('');
-  // const [addRequestStatus, setAddRequestStatus] = useState('idle');
+export default function EditPostForm() {
+  const { postId } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const post = useSelector((state) => selectPostById(state, postId));
   const users = useSelector(sellectAllUsers);
 
-  // const cansave =
-  //   [title, content, userId].every(Boolean) && addRequestStatus === 'idle';
+  const [title, setTitle] = useState(post?.title);
+  const [content, setContent] = useState(post?.content);
+  const [userId, setUserId] = useState(post?.userId);
+
+  const dispatch = useDispatch();
+
+  if (!post) {
+    return (
+      <section>
+        <h2 className="text-light">Post not found!</h2>
+      </section>
+    );
+  }
 
   function saveClick() {
     // if (cansave) {
@@ -32,12 +40,42 @@ export default function PostAdd() {
     //   }
     // }
     if (cansave) {
-      dispatch(addPost(title, content, userId));
+      dispatch(
+        updatePost({
+          title,
+          content,
+          userId,
+          id: post.id,
+          reactions: post.reactions,
+        })
+      );
       setTitle('');
       setContent('');
-      navigate('/');
+      navigate(`/post/${postId}`);
     }
   }
+
+  function deletePost() {
+    // try {
+    //   setAddRequestStatus('pending');
+    //   dispatch(removePost({ id: post.id})).unwrap();
+    //   setContent('');
+    //   setTitle('');
+    //   setUserId('');
+    //   navigate('/')
+    // } catch (err) {
+    //   console.error('Failed to delete the post', err);
+    // } finally {
+    //   setAddRequestStatus('idle');
+    // }
+
+    dispatch(removePost(post.id));
+    setTitle('');
+    setContent('');
+    setUserId('');
+    navigate('/');
+  }
+
   const cansave = [title, content, userId].every(Boolean);
 
   return (
@@ -58,8 +96,8 @@ export default function PostAdd() {
           <label className="form-label text-light">Author: </label>
           <select
             onChange={(e) => setUserId(e.target.value)}
-            value={userId}
             className="form-select text-center"
+            defaultValue={userId}
           >
             <option>...select...</option>
             {users.map((user) => (
@@ -84,7 +122,16 @@ export default function PostAdd() {
           disabled={!cansave}
           className="btn btn-primary"
         >
-          Save Post
+          Save Edit
+        </button>
+        <button
+          onClick={() => navigate(`/post/${postId}`)}
+          className="btn btn-light ms-5"
+        >
+          Cancel Edit
+        </button>
+        <button onClick={deletePost} className="btn btn-danger ms-5">
+          Delete Post
         </button>
       </div>
     </div>

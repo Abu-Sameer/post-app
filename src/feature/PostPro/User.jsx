@@ -5,7 +5,5 @@ import { sellectAllUsers } from '../AllSlices/UserSlice';
 export default function User({ userId }) {
   const allUser = useSelector(sellectAllUsers);
   const author = allUser.find((users) => users.id === userId);
-  return (
-    <span className="fs-5">by: {author ? author.name : 'Unknown Author'}</span>
-  );
+  return <span>by: {author ? author.name : 'Unknown Author'}</span>;
 }

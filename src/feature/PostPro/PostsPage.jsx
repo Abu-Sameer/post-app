@@ -1,42 +1,44 @@
 import { useSelector } from 'react-redux';
-import { selectAll } from '../AllSlices/PostSlice';
-import User from './User';
-import ReactionButton from './ReactionButton';
-import Modal from '../modal/Modal';
-import TimeAgo from './TimeAgo';
+import {
+  selectAll,
+  // getPostError,
+  // getPostStatus,
+  // fetchPosts,
+} from '../AllSlices/PostSlice';
+import PostExcert from './PostExcert';
+// import { useEffect } from 'react';
 
 export default function PostsPage() {
   const addedpost = useSelector(selectAll);
+  // const addedStatus = useSelector(getPostStatus);
+  // const addedError = useSelector(getPostError);
+
+  // useEffect(() => {
+  //   if (addedStatus === 'idle') {
+  //     dispatch(fetchPosts());
+  //   }
+  // }, [dispatch, addedStatus]);
 
   // Show new post at the top
-  const orderedPosts = addedpost
+  const orderedPost = addedpost
     .slice()
     .sort((a, b) => b.date.localeCompare(a.date));
 
+  // let content;
+  // if (addedStatus === 'loading') {
+  //   content = <p>"Loading..."</p>;
+  // } else if (addedStatus === 'succeeded') {
+  //   content = addedpost.slice().sort((a, b) => b.date.localeCompare(a.date));
+  // } else if (addedStatus === 'failed') {
+  //   content = <p>{addedError}</p>;
+  // }
+
   return (
-    <div className="container-fluid mt-3">
-      <h2 className=" text-light">Posts</h2>
+    <div className="container-fluid">
       <div className="row mb-4 ">
-        {orderedPosts.map((post) => {
-          return (
-            <div key={post.id} className="col-md-4 my-3 ">
-              <div className="card text-center border-light text-light bg-dark h-100">
-                <div className="card-body text-start">
-                  <h3 className="card-title">{post.title}</h3>
-                  <p className="card-text">{post.content}</p>
-                  <p>
-                    <User userId={post.userId} />
-                    <TimeAgo timestamp={post.date} />
-                  </p>
-                  <ReactionButton post={post} />
-                </div>
-                <footer className="card-footer border-light">
-                  <Modal post={post.id} />
-                </footer>
-              </div>
-            </div>
-          );
-        })}
+        {orderedPost.map((post) => (
+          <PostExcert key={post.id} post={post} />
+        ))}
       </div>
     </div>
   );
