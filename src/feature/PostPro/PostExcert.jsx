@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function PostExcert({ post }) {
   return (
-    <div key={post.id} className="container col-md-4 my-3">
+    <div key={post.id} className="col-md-4 my-3">
       <div className="card text-center border-light text-light bg-dark h-100">
         <div className="card-body text-start">
           <h3 className="card-title">{post.title}</h3>

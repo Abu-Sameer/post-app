@@ -2,11 +2,11 @@ import { useDispatch } from 'react-redux';
 import { reactionsAdded } from '../AllSlices/PostSlice';
 
 const reactionEmoji = {
-  thumbsUp: '😜',
-  wow: '😁',
-  heart: '⚽️',
-  rocket: '🐕',
-  coffee: '🎮',
+  thumbsUp: '👍',
+  wow: '😮',
+  heart: '❤️',
+  perfect: '👌',
+  coffee: '☕️',
 };
 
 export default function ReactionButton({ post }) {

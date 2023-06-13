@@ -117,22 +117,24 @@ export default function EditPostForm() {
             rows="3"
           />
         </div>
-        <button
-          onClick={saveClick}
-          disabled={!cansave}
-          className="btn btn-primary"
-        >
-          Save Edit
-        </button>
-        <button
-          onClick={() => navigate(`/post/${postId}`)}
-          className="btn btn-light ms-5"
-        >
-          Cancel Edit
-        </button>
-        <button onClick={deletePost} className="btn btn-danger ms-5">
-          Delete Post
-        </button>
+        <div className="row">
+          <button
+            onClick={saveClick}
+            disabled={!cansave}
+            className="btn btn-primary col my-2 mx-2"
+          >
+            Save Edit
+          </button>
+          <button
+            onClick={() => navigate(`/post/${postId}`)}
+            className="btn btn-light col my-2 mx-2"
+          >
+            Cancel Edit
+          </button>
+          <button onClick={deletePost} className="btn btn-danger col my-2 mx-2">
+            Delete Post
+          </button>
+        </div>
       </div>
     </div>
   );

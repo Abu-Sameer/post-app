@@ -15,7 +15,16 @@ export default function NavBar() {
         >
           <Notification />
         </Link>
-        <h2 className="text-light">Redux Blog</h2>
+        <Link
+          style={{
+            textDecoration: 'none',
+            color: 'inherit',
+          }}
+          to="/"
+        >
+          <h2 className="text-light">Redux Blog Home</h2>
+        </Link>
+
         <Link
           style={{
             textDecoration: 'none',
@@ -24,6 +33,15 @@ export default function NavBar() {
           to="post"
         >
           <h5 className="text-dark py-2 px-3 rounded bg-light">Add Post</h5>
+        </Link>
+        <Link
+          style={{
+            textDecoration: 'none',
+            color: 'inherit',
+          }}
+          to="user"
+        >
+          <h5 className="text-dark py-2 px-3 rounded bg-light">Users</h5>
         </Link>
       </div>
     </nav>
